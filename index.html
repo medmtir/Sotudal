@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOTUDAL | Entreprise de Revêtement de Sol - Concrete Flooring Solutions</title>
+    <meta name="description" content="SOTUDAL - Spécialiste en dallage industriel, béton imprimé et rampe d'accès à Sousse, Tunisie. Solutions professionnelles de revêtement de sol.">
+    
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="loader-inner">
+            <div class="loader-logo">
+                <svg viewBox="0 0 100 100" class="loader-icon">
+                    <polygon points="50,10 90,30 90,70 50,90 10,70 10,30" fill="none" stroke="#c0c0c0" stroke-width="2"/>
+                    <polygon points="50,25 75,37 75,63 50,75 25,63 25,37" fill="none" stroke="#8a9bae" stroke-width="1.5"/>
+                    <rect x="35" y="35" width="12" height="12" fill="#8a9bae" transform="rotate(15, 41, 41)"/>
+                    <rect x="52" y="35" width="12" height="12" fill="#c0c0c0" transform="rotate(15, 58, 41)"/>
+                    <rect x="43" y="50" width="12" height="12" fill="#a0b0c0" transform="rotate(15, 49, 56)"/>
+                </svg>
+                <h2 class="loader-text">SOTUDAL</h2>
+                <div class="loader-bar">
+                    <div class="loader-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D Canvas Background -->
+    <canvas id="liquid-canvas"></canvas>
+
+    <!-- Floating Particles -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <svg viewBox="0 0 50 50" class="nav-icon">
+                    <rect x="15" y="15" width="9" height="9" fill="#8a9bae" transform="rotate(15, 19, 19)"/>
+                    <rect x="26" y="15" width="9" height="9" fill="#c0c0c0" transform="rotate(15, 30, 19)"/>
+                    <rect x="20" y="25" width="9" height="9" fill="#a0b0c0" transform="rotate(15, 24, 29)"/>
+                </svg>
+                <span>SOTUDAL</span>
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#hero" class="nav-link active">Accueil</a>
+                <a href="#about" class="nav-link">À Propos</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#process" class="nav-link">Notre Processus</a>
+                <a href="#gallery" class="nav-link">Réalisations</a>
+                <a href="#devis" class="nav-link nav-cta">Demander un Devis</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge" data-animate="fade-up">
+                <span class="badge-line"></span>
+                <span>Sousse, Tunisie</span>
+                <span class="badge-line"></span>
+            </div>
+            <h1 class="hero-title" data-animate="fade-up" data-delay="0.2">
+                <span class="title-line">
+                    <span class="title-word">SOTUDAL</span>
+                </span>
+            </h1>
+            <div class="hero-subtitle" data-animate="fade-up" data-delay="0.4">
+                <p class="subtitle-main">Entreprise de Revêtement de Sol</p>
+                <p class="subtitle-en">Concrete Flooring Solutions</p>
+            </div>
+            <div class="hero-services" data-animate="fade-up" data-delay="0.6">
+                <span class="service-tag">Dallage Industriel</span>
+                <span class="service-divider">•</span>
+                <span class="service-tag">Béton Imprimé</span>
+                <span class="service-divider">•</span>
+                <span class="service-tag">Rampe d'Accès</span>
+            </div>
+            <div class="hero-cta" data-animate="fade-up" data-delay="0.8">
+                <a href="#devis" class="btn btn-primary">
+                    <span>Demander un Devis</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#services" class="btn btn-outline">
+                    <span>Nos Services</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Défiler</span>
+        </div>
+        <!-- 3D Floating elements -->
+        <div class="hero-3d-elements">
+            <div class="floating-cube cube-1"></div>
+            <div class="floating-cube cube-2"></div>
+            <div class="floating-cube cube-3"></div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content" data-animate="slide-right">
+                    <span class="section-label">Qui Sommes-Nous</span>
+                    <h2 class="section-title">L'Excellence dans le <br><span class="highlight">Revêtement de Sol</span></h2>
+                    <p class="about-text">
+                        SOTUDAL est une entreprise tunisienne spécialisée dans les solutions professionnelles de revêtement de sol. 
+                        Basée à Sousse, nous offrons des services de haute qualité en dallage industriel, béton imprimé et 
+                        rampes d'accès pour les projets commerciaux, industriels et résidentiels à travers toute la Tunisie.
+                    </p>
+                    <p class="about-text">
+                        Notre équipe de professionnels expérimentés s'engage à livrer des résultats exceptionnels, 
+                        en utilisant les dernières techniques et matériaux de qualité supérieure pour chaque projet.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="150">0</span>
+                            <span class="stat-plus">+</span>
+                            <span class="stat-label">Projets Réalisés</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="10">0</span>
+                            <span class="stat-plus">+</span>
+                            <span class="stat-label">Années d'Expérience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="100">0</span>
+                            <span class="stat-plus">%</span>
+                            <span class="stat-label">Satisfaction Client</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual" data-animate="slide-left">
+                    <div class="about-image-stack">
+                        <div class="about-img about-img-1">
+                            <img src="images/dallage-industriel.png" alt="Dallage Industriel SOTUDAL" loading="lazy">
+                        </div>
+                        <div class="about-img about-img-2">
+                            <img src="images/beton-imprime.png" alt="Béton Imprimé SOTUDAL" loading="lazy">
+                        </div>
+                        <div class="about-accent-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-label">Nos Services</span>
+                <h2 class="section-title">Solutions de <span class="highlight">Revêtement Professionnel</span></h2>
+                <p class="section-desc">Des solutions sur mesure pour tous vos besoins en revêtement de sol</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1: Dallage Industriel -->
+                <div class="service-card" data-animate="fade-up" data-delay="0.1">
+                    <div class="card-3d-wrapper">
+                        <div class="card-front">
+                            <div class="card-image">
+                                <img src="images/dallage-industriel.png" alt="Dallage Industriel" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-icon">
+                                    <i class="fas fa-industry"></i>
+                                </div>
+                                <h3>Dallage Industriel</h3>
+                                <p>Revêtements de sol haute résistance pour entrepôts, usines et zones industrielles. Finitions lisses et durables.</p>
+                                <div class="card-features">
+                                    <span><i class="fas fa-check"></i> Haute résistance</span>
+                                    <span><i class="fas fa-check"></i> Anti-poussière</span>
+                                    <span><i class="fas fa-check"></i> Surface lisse</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2: Béton Imprimé -->
+                <div class="service-card" data-animate="fade-up" data-delay="0.3">
+                    <div class="card-3d-wrapper">
+                        <div class="card-front">
+                            <div class="card-image">
+                                <img src="images/beton-imprime.png" alt="Béton Imprimé" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-icon">
+                                    <i class="fas fa-paint-roller"></i>
+                                </div>
+                                <h3>Béton Imprimé</h3>
+                                <p>Béton décoratif avec motifs personnalisés imitant la pierre, le bois ou le pavé. Idéal pour terrasses et allées.</p>
+                                <div class="card-features">
+                                    <span><i class="fas fa-check"></i> Décoratif</span>
+                                    <span><i class="fas fa-check"></i> Multi-motifs</span>
+                                    <span><i class="fas fa-check"></i> Durable</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3: Rampe d'Accès -->
+                <div class="service-card" data-animate="fade-up" data-delay="0.5">
+                    <div class="card-3d-wrapper">
+                        <div class="card-front">
+                            <div class="card-image">
+                                <img src="images/rampe-acces.png" alt="Rampe d'Accès Nazello" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-icon">
+                                    <i class="fas fa-road"></i>
+                                </div>
+                                <h3>Rampe d'Accès (Nazello)</h3>
+                                <p>Rampes antidérapantes conformes aux normes de sécurité. Finition Nazello pour une adhérence maximale.</p>
+                                <div class="card-features">
+                                    <span><i class="fas fa-check"></i> Antidérapant</span>
+                                    <span><i class="fas fa-check"></i> Norme PMR</span>
+                                    <span><i class="fas fa-check"></i> Sécurisé</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3D PROCESS SECTION ==================== -->
+    <section id="process" class="section process">
+        <div class="process-bg-effect"></div>
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-label">Notre Processus</span>
+                <h2 class="section-title">Les Étapes de <span class="highlight">Notre Travail</span></h2>
+                <p class="section-desc">Du premier contact à la finition parfaite, découvrez notre processus de travail étape par étape</p>
+            </div>
+
+            <div class="process-timeline">
+                <!-- Step 1 -->
+                <div class="process-step" data-step="1">
+                    <div class="step-3d-container">
+                        <div class="step-visual">
+                            <div class="step-number-bg">01</div>
+                            <div class="step-image-wrapper">
+                                <div class="step-image">
+                                    <img src="images/process-preparation.png" alt="Préparation du terrain" loading="lazy">
+                                </div>
+                                <div class="step-image-frame"></div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-badge">Étape 01</div>
+                            <h3>Étude & Préparation du Terrain</h3>
+                            <p>Analyse approfondie du site, étude du sol et préparation du terrain. Nous évaluons les contraintes techniques et préparons une base solide pour garantir la durabilité de votre revêtement.</p>
+                            <ul class="step-details">
+                                <li><i class="fas fa-angle-right"></i> Visite technique du site</li>
+                                <li><i class="fas fa-angle-right"></i> Étude de sol et nivellement</li>
+                                <li><i class="fas fa-angle-right"></i> Excavation et compactage</li>
+                                <li><i class="fas fa-angle-right"></i> Mise en place du hérisson</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M50,0 Q50,50 50,100" stroke="rgba(138,155,174,0.3)" stroke-width="2" fill="none" class="connector-path"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-step" data-step="2">
+                    <div class="step-3d-container reverse">
+                        <div class="step-content">
+                            <div class="step-badge">Étape 02</div>
+                            <h3>Coffrage & Armature</h3>
+                            <p>Installation précise du coffrage et mise en place des armatures en acier. Cette étape cruciale détermine la résistance et la planéité de votre dalle béton.</p>
+                            <ul class="step-details">
+                                <li><i class="fas fa-angle-right"></i> Installation du film polyane</li>
+                                <li><i class="fas fa-angle-right"></i> Pose du treillis soudé</li>
+                                <li><i class="fas fa-angle-right"></i> Coffrage périphérique</li>
+                                <li><i class="fas fa-angle-right"></i> Joints de dilatation</li>
+                            </ul>
+                        </div>
+                        <div class="step-visual">
+                            <div class="step-number-bg">02</div>
+                            <div class="step-image-wrapper">
+                                <div class="step-image">
+                                    <img src="images/process-preparation.png" alt="Coffrage et armature" loading="lazy">
+                                </div>
+                                <div class="step-image-frame"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M50,0 Q50,50 50,100" stroke="rgba(138,155,174,0.3)" stroke-width="2" fill="none" class="connector-path"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-step" data-step="3">
+                    <div class="step-3d-container">
+                        <div class="step-visual">
+                            <div class="step-number-bg">03</div>
+                            <div class="step-image-wrapper">
+                                <div class="step-image">
+                                    <img src="images/process-coulage.png" alt="Coulage du béton" loading="lazy">
+                                </div>
+                                <div class="step-image-frame"></div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-badge">Étape 03</div>
+                            <h3>Coulage du Béton</h3>
+                            <p>Coulage du béton avec des formulations spécifiques adaptées à votre projet. Utilisation de béton prêt à l'emploi de haute qualité avec vibration soignée.</p>
+                            <ul class="step-details">
+                                <li><i class="fas fa-angle-right"></i> Béton dosé sur mesure</li>
+                                <li><i class="fas fa-angle-right"></i> Pompage et répartition</li>
+                                <li><i class="fas fa-angle-right"></i> Vibration mécanique</li>
+                                <li><i class="fas fa-angle-right"></i> Contrôle d'épaisseur</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M50,0 Q50,50 50,100" stroke="rgba(138,155,174,0.3)" stroke-width="2" fill="none" class="connector-path"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="process-step" data-step="4">
+                    <div class="step-3d-container reverse">
+                        <div class="step-content">
+                            <div class="step-badge">Étape 04</div>
+                            <h3>Lissage & Finition</h3>
+                            <p>Lissage mécanique avec hélicoptère pour obtenir une surface parfaitement plane et lisse. Plusieurs passes pour une finition impeccable.</p>
+                            <ul class="step-details">
+                                <li><i class="fas fa-angle-right"></i> Talochage mécanique</li>
+                                <li><i class="fas fa-angle-right"></i> Lissage à l'hélicoptère</li>
+                                <li><i class="fas fa-angle-right"></i> Contrôle de planéité</li>
+                                <li><i class="fas fa-angle-right"></i> Finition miroir</li>
+                            </ul>
+                        </div>
+                        <div class="step-visual">
+                            <div class="step-number-bg">04</div>
+                            <div class="step-image-wrapper">
+                                <div class="step-image">
+                                    <img src="images/process-finition.png" alt="Lissage et finition" loading="lazy">
+                                </div>
+                                <div class="step-image-frame"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M50,0 Q50,50 50,100" stroke="rgba(138,155,174,0.3)" stroke-width="2" fill="none" class="connector-path"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="process-step" data-step="5">
+                    <div class="step-3d-container">
+                        <div class="step-visual">
+                            <div class="step-number-bg">05</div>
+                            <div class="step-image-wrapper">
+                                <div class="step-image">
+                                    <img src="images/dallage-industriel.png" alt="Traitement et protection" loading="lazy">
+                                </div>
+                                <div class="step-image-frame"></div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-badge">Étape 05</div>
+                            <h3>Traitement & Protection</h3>
+                            <p>Application de produits de cure et de protection pour garantir la durabilité et la résistance de votre sol. Traitement anti-poussière et imperméabilisant.</p>
+                            <ul class="step-details">
+                                <li><i class="fas fa-angle-right"></i> Cure du béton</li>
+                                <li><i class="fas fa-angle-right"></i> Traitement anti-poussière</li>
+                                <li><i class="fas fa-angle-right"></i> Imperméabilisation</li>
+                                <li><i class="fas fa-angle-right"></i> Livraison du projet</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALLERY SECTION ==================== -->
+    <section id="gallery" class="section gallery">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-label">Nos Réalisations</span>
+                <h2 class="section-title">Projets <span class="highlight">Récents</span></h2>
+                <p class="section-desc">Découvrez quelques-unes de nos réalisations à travers la Tunisie</p>
+            </div>
+
+            <!-- Gallery Filter -->
+            <div class="gallery-filter" data-animate="fade-up">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="dallage">Dallage Industriel</button>
+                <button class="filter-btn" data-filter="beton">Béton Imprimé</button>
+                <button class="filter-btn" data-filter="rampe">Rampe d'Accès</button>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="dallage" data-animate="zoom-in">
+                    <div class="gallery-img">
+                        <img src="images/dallage-industriel.png" alt="Dallage industriel - Usine Sousse" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Usine Industrielle</h4>
+                                <p>Dallage Industriel - Sousse</p>
+                                <span class="gallery-tag">2500 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beton" data-animate="zoom-in" data-delay="0.1">
+                    <div class="gallery-img">
+                        <img src="images/beton-imprime.png" alt="Béton imprimé - Villa Hammamet" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Villa Privée</h4>
+                                <p>Béton Imprimé - Hammamet</p>
+                                <span class="gallery-tag">180 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rampe" data-animate="zoom-in" data-delay="0.2">
+                    <div class="gallery-img">
+                        <img src="images/rampe-acces.png" alt="Rampe d'accès - Centre commercial" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Centre Commercial</h4>
+                                <p>Rampe d'Accès - Monastir</p>
+                                <span class="gallery-tag">120 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item large" data-category="dallage" data-animate="zoom-in" data-delay="0.1">
+                    <div class="gallery-img">
+                        <img src="images/process-coulage.png" alt="Chantier dallage industriel" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Entrepôt Logistique</h4>
+                                <p>Dallage Industriel - Sfax</p>
+                                <span class="gallery-tag">5000 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beton" data-animate="zoom-in" data-delay="0.2">
+                    <div class="gallery-img">
+                        <img src="images/process-finition.png" alt="Finition béton" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Hôtel Resort</h4>
+                                <p>Béton Imprimé - Djerba</p>
+                                <span class="gallery-tag">800 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="dallage" data-animate="zoom-in" data-delay="0.3">
+                    <div class="gallery-img">
+                        <img src="images/process-preparation.png" alt="Préparation terrain" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Zone Industrielle</h4>
+                                <p>Dallage Industriel - Sousse</p>
+                                <span class="gallery-tag">3200 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-label">Témoignages</span>
+                <h2 class="section-title">Ce que Disent <span class="highlight">Nos Clients</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-animate="fade-up" data-delay="0.1">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Travail exceptionnel sur notre entrepôt de 3000m². L'équipe SOTUDAL a respecté les délais et la qualité du dallage est irréprochable. Je recommande vivement."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AH</div>
+                        <div>
+                            <strong>Ahmed Hammami</strong>
+                            <span>Directeur, Logistique du Sud</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-animate="fade-up" data-delay="0.3">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Le béton imprimé de notre terrasse est magnifique. Nos invités sont toujours impressionnés par la qualité et les motifs. Merci SOTUDAL!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SB</div>
+                        <div>
+                            <strong>Sonia Ben Ali</strong>
+                            <span>Propriétaire, Villa Hammamet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-animate="fade-up" data-delay="0.5">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Les rampes d'accès réalisées pour notre clinique sont parfaites. Conformes aux normes, esthétiques et très fonctionnelles. Professionnalisme au rendez-vous."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">KM</div>
+                        <div>
+                            <strong>Karim Mansouri</strong>
+                            <span>Gérant, Clinique El Yasmine</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DEVIS / QUOTE SECTION ==================== -->
+    <section id="devis" class="section devis">
+        <div class="devis-bg-effect"></div>
+        <div class="container">
+            <div class="devis-grid">
+                <div class="devis-info" data-animate="slide-right">
+                    <span class="section-label">Contactez-nous</span>
+                    <h2 class="section-title">Demander un <span class="highlight">Devis Gratuit</span></h2>
+                    <p class="devis-desc">
+                        Remplissez le formulaire et notre équipe vous contactera dans les plus brefs délais 
+                        pour discuter de votre projet et vous fournir un devis personnalisé.
+                    </p>
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <strong>Mohamed</strong>
+                                <a href="tel:+21697836606">97 836 606</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <strong>Fethi</strong>
+                                <a href="tel:+21698228305">98 228 305</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <strong>Email</strong>
+                                <a href="mailto:contact@sotudal.com">contact@sotudal.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Adresse</strong>
+                                <span>Sousse, Tunisie</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="devis-form-wrapper" data-animate="slide-left">
+                    <form id="devisForm" class="devis-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nom">Nom Complet *</label>
+                                <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="telephone">Téléphone *</label>
+                                <input type="tel" id="telephone" name="telephone" required placeholder="Votre numéro">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Votre email">
+                            </div>
+                            <div class="form-group">
+                                <label for="ville">Ville</label>
+                                <input type="text" id="ville" name="ville" placeholder="Votre ville">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Type de Service *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Choisir un service</option>
+                                <option value="dallage">Dallage Industriel</option>
+                                <option value="beton">Béton Imprimé</option>
+                                <option value="rampe">Rampe d'Accès (Nazello)</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="surface">Surface Estimée (m²)</label>
+                                <input type="number" id="surface" name="surface" placeholder="Ex: 500">
+                            </div>
+                            <div class="form-group">
+                                <label for="delai">Délai Souhaité</label>
+                                <select id="delai" name="delai">
+                                    <option value="">Choisir</option>
+                                    <option value="urgent">Urgent (< 1 mois)</option>
+                                    <option value="normal">Normal (1-3 mois)</option>
+                                    <option value="flexible">Flexible (3+ mois)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Description du Projet</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Décrivez votre projet en détail..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Envoyer la Demande</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <p class="form-note"><i class="fas fa-lock"></i> Vos informations sont confidentielles et ne seront jamais partagées.</p>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div id="formSuccess" class="form-success" style="display: none;">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Demande Envoyée !</h3>
+                        <p>Merci pour votre demande. Notre équipe vous contactera dans les 24 heures.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHATSAPP FLOAT ==================== -->
+    <a href="https://wa.me/21697836606" target="_blank" class="whatsapp-float" title="Contactez-nous sur WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Besoin d'aide ?</span>
+    </a>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-wave">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,30 1440,60 L1440,120 L0,120 Z" fill="rgba(13,27,42,1)"/>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 50 50" class="nav-icon">
+                            <rect x="15" y="15" width="9" height="9" fill="#8a9bae" transform="rotate(15, 19, 19)"/>
+                            <rect x="26" y="15" width="9" height="9" fill="#c0c0c0" transform="rotate(15, 30, 19)"/>
+                            <rect x="20" y="25" width="9" height="9" fill="#a0b0c0" transform="rotate(15, 24, 29)"/>
+                        </svg>
+                        <span>SOTUDAL</span>
+                    </div>
+                    <p>Entreprise de Revêtement de Sol<br>Concrete Flooring Solutions</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/21697836606" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <a href="#hero">Accueil</a>
+                    <a href="#about">À Propos</a>
+                    <a href="#services">Services</a>
+                    <a href="#process">Notre Processus</a>
+                    <a href="#gallery">Réalisations</a>
+                    <a href="#devis">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <a href="#services">Dallage Industriel</a>
+                    <a href="#services">Béton Imprimé</a>
+                    <a href="#services">Rampe d'Accès</a>
+                    <a href="#devis">Demander un Devis</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Sousse, Tunisie</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Mohamed: 97 836 606</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Fethi: 98 228 305</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@sotudal.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SOTUDAL. Tous droits réservés. | Entreprise de Revêtement de Sol - Sousse, Tunisie</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
